@@ -2,10 +2,13 @@ package com.restapi.crudpractice.controller;
 
 
 import com.restapi.crudpractice.model.CloudVendor;
+import com.restapi.crudpractice.response.ResponseHandler;
 import com.restapi.crudpractice.service.CloudVendorService;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,9 +31,9 @@ public class CloudVendorController {
 	}
 
 	@GetMapping("{vendorId}")
-	public CloudVendor getVendorDetails(@PathVariable("vendorId") String vendorId) {
+	public ResponseEntity<Object> getVendorDetails(@PathVariable("vendorId") String vendorId) {
 		 
-    	 return cloudVendorService.getCloudVendor(vendorId);
+    	 return ResponseHandler.responseBuilder("Requested Vendor Details are given here",HttpStatus.OK, cloudVendorService.getCloudVendor(vendorId));
 	}
     
 	@GetMapping()
